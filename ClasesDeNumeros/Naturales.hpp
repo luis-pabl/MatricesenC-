@@ -12,8 +12,38 @@ namespace NUMEROS{
     Naturales(unsigned int a ){
       n=a;
     }
+    Naturales(int a ){
+      if(a<0){
+        throw "Un natural no puede ser Negativo";
+      }
+      this->n=(unsigned int)a;
+    }
+
+    Naturales& operator=(int a){
+      if (a<0) {
+        throw "Un natural no puede ser Negativo";
+      }
+      this->n=(unsigned int)a;
+      return *this;
+    }
+    Naturales& operator=(Naturales a){
+
+      this->n=a.n;
+      return *this;
+    }
+    Naturales pow(Naturales p){
+      Naturales aux(this->n);
+      for (unsigned int i = 1; i < p.n; i++) {
+        aux=aux.n*n;
+      }
+      return aux;
+    }
   };
+
+
+
   Naturales operator+(Naturales a,Naturales b){
+
     Naturales c;
     c.n=a.n+b.n;
     return c;
@@ -21,6 +51,9 @@ namespace NUMEROS{
   Naturales operator-(Naturales a,Naturales b){
     Naturales c;
     c.n=a.n-b.n;
+    if (a.n<b.n) {
+      throw "Error en la resta";
+    }
     //El valor no puede ser negativo
     return c;
   }
@@ -39,6 +72,7 @@ namespace NUMEROS{
   ostream& operator<<(ostream& os,Naturales a){
     return os<<a.n;
   }
+
 };
 #endif
 //operardor de entrada >>
