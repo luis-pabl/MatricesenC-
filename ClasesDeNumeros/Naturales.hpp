@@ -41,3 +41,5 @@ namespace NUMEROS{
   }
 };
 #endif
+//operardor de entrada >>
+//division negativos no ni cero
