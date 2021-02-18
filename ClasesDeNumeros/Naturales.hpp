@@ -72,6 +72,9 @@ namespace NUMEROS{
   ostream& operator<<(ostream& os,Naturales a){
     return os<<a.n;
   }
+  istream& operator>>(istream& is,Naturales a){
+    return is>>a.n;
+  }
 
 };
 #endif

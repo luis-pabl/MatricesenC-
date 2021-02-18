@@ -24,11 +24,11 @@ int main(){
     cout<<"Valor de la resta de a:"<<a<<" - b: "<<b<<" = c:"<<a-b<<endl;
   }
   catch(const char *s ) {
-  cout << "\nError numero: " << s <<endl;
+  cout << "\n" << s <<endl;
   }
 
-  cout<<"Valor de la suma de a:"<<a<<" * b: "<<b<<" = c:"<<a*b<<endl;
-  cout<<"Valor de la suma de a:"<<d<<" / b: "<<e<<" = c:"<<d/e<<endl;
+  cout<<"Valor de la multiplicacion de a:"<<a<<" * b: "<<b<<" = c:"<<a*b<<endl;
+  cout<<"Valor de la division de a:"<<d<<" / b: "<<e<<" = c:"<<d/e<<endl;
 
   cout<<"Valor de la potencia a la 3:"<< b.pow(3) <<endl;
 }
