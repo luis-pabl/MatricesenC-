@@ -12,6 +12,10 @@ namespace NUMEROS{
       numerador=1;
       denominador=1;
     }
+    Racionales(Enteros a){
+      numerador=a.n;
+      denominador=1;
+    }
     Racionales(Enteros a,Enteros b ){
       if(a.n<0&&b.n<0){
         numerador=a.n*-1;
@@ -34,19 +38,63 @@ namespace NUMEROS{
         }
         denominador=b.n;
       }
+      int pri=2;
+      for(int i=0;i<=a.n;i++){
+          if(a.n%pri==0&&b.n%pri==0){
+            a.n=a.n/pri;
+            b.n=b.n/pri;
+          }
+          else{
+            pri++;
+          }
+      }
     }
-    Racionales& operator=(Enteros b){
-      static int cont=0;
-      if(cont==0){
-      this->numerador=b.n;
-      cont++;
-      return *this;
+    Racionales(int n,int d ){
+      Enteros a=n,b=d;
+      if(a.n<0&&b.n<0){
+        numerador=a.n*-1;
+        if(b.n==0){
+          throw "El denominador no puede ser Cero";
+        }
+        denominador=b.n*-1;
+      }
+      else if(b.n<0){
+        numerador=a.n*-1;
+        if(b.n==0){
+          throw "El denominador no puede ser Cero";
+        }
+        denominador=b.n*-1;
       }
       else{
-        this->denominador=b.n;
-        cont=0;
-        return *this;
+        numerador=a.n;
+        if(b.n==0){
+          throw "El denominador no puede ser Cero";
+        }
+        denominador=b.n;
       }
+      int pri=2;
+      for(int i=0;i<=a.n;i++){
+          if(a.n%pri==0&&b.n%pri==0){
+            a.n=a.n/pri;
+            b.n=b.n/pri;
+            i=0;
+          }
+          else{
+            pri++;
+          }
+      }
+      numerador=a.n;
+      denominador=b.n;
+    }
+    Racionales& operator=(Enteros b){
+      this->numerador=b.n;
+      this->denominador=1;
+      return *this;
+    }
+    Racionales& operator=(Racionales a){
+      this->numerador=a.numerador;
+      this->denominador=a.denominador;
+      return *this;
     }
     Racionales pow(Enteros p){
       Racionales aux(this->numerador,this->denominador);
@@ -56,18 +104,26 @@ namespace NUMEROS{
       }
       return aux;
     }
+    bool operator==(const Racionales &a)const{
+      return this->numerador/this->denominador==a.numerador/a.denominador;
+    }
+    bool operator<(const Racionales &a)const{
+      return this->numerador/this->denominador<a.numerador/a.denominador;
+    }
+    bool operator>(const Racionales &a)const{
+      return this->numerador/this->denominador>a.numerador/a.denominador;
+    }
+    bool operator!=(const Racionales &a)const{
+      return this->numerador/this->denominador!=a.numerador/a.denominador;
+    }
   };
+
   Racionales operator+(Racionales a,Racionales b){
     Racionales c;
     if(a.denominador==b.denominador){
       c.numerador=a.numerador+b.numerador;
       c.denominador=a.denominador;
-      if(c.numerador==c.denominador){
-        return c;
-      }
-      else{
-        return c;
-      }
+      return c;
     }
     else{
       c.numerador=a.numerador*b.denominador+b.numerador*a.denominador;
