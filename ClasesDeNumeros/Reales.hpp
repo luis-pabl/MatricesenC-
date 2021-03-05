@@ -16,7 +16,6 @@ namespace NUMEROS{
     }
     Reales(float a){
       real=a;
-
     }
     Reales(Racionales a){
       racional=a;
@@ -54,15 +53,31 @@ namespace NUMEROS{
       }
       return aux;
     }
-    Reales pow(Racionales p){
+    Reales raiz(Enteros p){
       Reales aux(this->racional.numerador,this->racional.denominador,this->real);
-      for (int i = 1; i < p.n; i++) {
-        aux.racional.numerador=aux.racional.numerador*racional.numerador;
-        aux.racional.denominador=aux.racional.denominador*racional.denominador;
-        aux.real=aux.real*real;
+      float aux_raiz[2]={float(aux.racional.numerador),float(aux.racional.denominador)};
+      int k,l=1;
+      for(int j=0;j<2;j++){
+        for(int i=1;i<aux_raiz[j];i++){
+          for(int cont=0;cont<p.n;cont++){
+            k=i;
+            l*=i;
+          }
+          if(l==aux_raiz[j]){
+            aux_raiz[j]=k;
+            l=1;
+          }
+          else{
+            l=1;
+          }
+        }
       }
+      aux.racional.numerador=aux_raiz[0];
+      aux.racional.denominador=aux_raiz[1];
+      aux.real=float(aux.racional.numerador)/float(aux.racional.denominador);
       return aux;
     }
+
     bool operator==(const Reales &a)const{
       return this->real==a.real;
     }
@@ -133,6 +148,16 @@ namespace NUMEROS{
         return os<<a.racional.numerador/a.racional.denominador;
       }
       else{
+        for(int i=2;i<a.racional.numerador;){
+          if(a.racional.numerador%i==0&&a.racional.denominador%i==0){
+            a.racional.numerador=a.racional.numerador/i;
+            a.racional.denominador=a.racional.denominador/i;
+          }
+          else{
+            i++;
+          }
+        }
+        a.real=float(a.racional.numerador)/float(a.racional.denominador);
         cout<<a.racional.numerador<<"/";
         return os<<a.racional.denominador;
       }
@@ -140,4 +165,4 @@ namespace NUMEROS{
   }
 };
 #endif
-//Hacer el metodo simplificar
+//Hacer el metodo privado de simplificar
