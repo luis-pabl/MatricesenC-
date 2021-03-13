@@ -8,14 +8,14 @@ int main(){
     Enteros a,b,c;
     Enteros d,e,f,g;
     a=1;
-    b=0;
+    b=2;
     c=1;
     d=2;
     f=3;
     g=2;
-    Racionales a1(a,b),b1(c,d),c1,d1,f1(64,128),g1(512,1024);
+    Racionales a1(a,b),b1(c,d),c1,d1,f1(27,128),g1(512,1024);
     cout<<"valor de a1: "<<a1<<endl;
-    c1=f;
+    c1=f1;
     d1=g;
     cout<<"valor de a1 despues de la igualdad: "<<a1<<endl;
     cout<<"valor de b1: "<<b1<<endl;
@@ -39,7 +39,8 @@ int main(){
     cout<<"Valor de la resta de a1: "<<a1<<" - b1: "<<b1<<" = c:"<<a1-b1<<endl;
     cout<<"Valor de la multiplicacion de a1: "<<a1<<" * b1: "<<b1<<" = c:"<<a1*b1<<endl;
     cout<<"Valor de la division de a1: "<<a1<<" / b1: "<<b1<<" = c:"<<a1/b1<<endl;
-    cout<<"Valor de la potencia de c1: "<<c1.pow(3);
+    cout<<"Valor de la potencia de c1: "<<c1.pow(3)<<endl;
+    cout<<"Valor de la raiz de c1: "<<c1.pow(3).raiz(3)<<endl;
   }
   catch(const char *s ){
     cout << "\n" << s <<endl;

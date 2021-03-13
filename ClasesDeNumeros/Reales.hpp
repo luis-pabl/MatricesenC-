@@ -10,24 +10,31 @@ namespace NUMEROS{
   public:
     Racionales racional; //Representacion racional del Numero
     float real; //Representacion 'decimal' del numero (numeros de coma flotante)
+    int tipo;
     Reales(){
       racional=1;
       real=1;
+      tipo=0;
     }
     Reales(float a){
       real=a;
+      racional=frac(a);
+      tipo=0;
     }
     Reales(Racionales a){
       racional=a;
       real=float(a.numerador)/float (a.denominador);
+      tipo=0;
     }
     Reales(int n,int d){
       racional=Racionales(n,d);
       real=float(n)/float(d);
+      tipo=0;
     }
     Reales(int n,int d,float a){
       racional=Racionales(n,d);
       real=a;
+      tipo=0;
     }
     Reales& operator=(Enteros b){
       //Formato racional
@@ -53,31 +60,33 @@ namespace NUMEROS{
       }
       return aux;
     }
-    Reales raiz(Enteros p){
-      Reales aux(this->racional.numerador,this->racional.denominador,this->real);
-      float aux_raiz[2]={float(aux.racional.numerador),float(aux.racional.denominador)};
-      int k,l=1;
-      for(int j=0;j<2;j++){
-        for(int i=1;i<aux_raiz[j];i++){
-          for(int cont=0;cont<p.n;cont++){
-            k=i;
-            l*=i;
-          }
-          if(l==aux_raiz[j]){
-            aux_raiz[j]=k;
-            l=1;
-          }
-          else{
-            l=1;
-          }
+    void set_tipo(int a){
+      tipo=a;
+    }
+    Racionales frac(float a){
+      int b=int(a);
+      float c=a-b;
+      c=c*100000;
+      Enteros n,d;
+      n=c+b*100000;
+      d=100000;
+      Racionales e(n,d);
+      return simp(e);
+    }
+    Racionales simp(Racionales a){
+      int pri=2;
+      for(int i=0;i<a.numerador;i++){
+        if(a.numerador%pri==0&&a.denominador%pri==0){
+          a.numerador=a.numerador/pri;
+          a.denominador=a.denominador/pri;
+          i=0;
+        }
+        else{
+          pri++;
         }
       }
-      aux.racional.numerador=aux_raiz[0];
-      aux.racional.denominador=aux_raiz[1];
-      aux.real=float(aux.racional.numerador)/float(aux.racional.denominador);
-      return aux;
+      return a;
     }
-
     bool operator==(const Reales &a)const{
       return this->real==a.real;
     }
@@ -98,12 +107,14 @@ namespace NUMEROS{
       c.racional.numerador=a.racional.numerador+b.racional.numerador;
       c.racional.denominador=a.racional.denominador;
       c.real=a.real+b.real;
+      c.racional=c.simp(c.racional);
       return c;
     }
     else{
       c.racional.numerador=a.racional.numerador*b.racional.denominador+b.racional.numerador*a.racional.denominador;
       c.racional.denominador=a.racional.denominador*b.racional.denominador;
       c.real=a.real+b.real;
+      c.racional=c.simp(c.racional);
       return c;
     }
   }
@@ -112,13 +123,15 @@ namespace NUMEROS{
     if(a.racional.denominador==b.racional.denominador){
       c.racional.numerador=a.racional.numerador-b.racional.numerador;
       c.racional.denominador=a.racional.denominador;
-        c.real=a.real-b.real;
+      c.real=a.real-b.real;
+      c.racional=c.simp(c.racional);
       return c;
     }
     else{
       c.racional.numerador=a.racional.numerador*b.racional.denominador-b.racional.numerador*a.racional.denominador;
       c.racional.denominador=a.racional.denominador*b.racional.denominador;
       c.real=a.real-b.real;
+      c.racional=c.simp(c.racional);
       return c;
     }
   }
@@ -127,6 +140,7 @@ namespace NUMEROS{
     c.racional.numerador=a.racional.numerador*b.racional.numerador;
     c.racional.denominador=a.racional.denominador*b.racional.denominador;
     c.real=a.real*b.real;
+    c.racional=c.simp(c.racional);
     return c;
   }
   Reales operator/(Reales a,Reales b){
@@ -134,10 +148,11 @@ namespace NUMEROS{
     c.racional.numerador=a.racional.numerador*b.racional.denominador;
     c.racional.denominador=a.racional.denominador*b.racional.numerador;
     c.real=a.real/b.real;
+    c.racional=c.simp(c.racional);
     return c;
   }
   ostream& operator<<(ostream& os,Reales a){
-    static int cont=0;
+   int cont=a.tipo;
     if(cont==0){
         cont++;
         return os<<a.real;
@@ -148,13 +163,15 @@ namespace NUMEROS{
         return os<<a.racional.numerador/a.racional.denominador;
       }
       else{
-        for(int i=2;i<a.racional.numerador;){
-          if(a.racional.numerador%i==0&&a.racional.denominador%i==0){
-            a.racional.numerador=a.racional.numerador/i;
-            a.racional.denominador=a.racional.denominador/i;
+        int pri=2;
+        for(int i=0;i<a.racional.numerador;i++){
+          if(a.racional.numerador%pri==0&&a.racional.denominador%pri==0){
+            a.racional.numerador=a.racional.numerador/pri;
+            a.racional.denominador=a.racional.denominador/pri;
+            i=0;
           }
           else{
-            i++;
+            pri++;
           }
         }
         a.real=float(a.racional.numerador)/float(a.racional.denominador);

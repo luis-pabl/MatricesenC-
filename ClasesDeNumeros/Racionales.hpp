@@ -43,9 +43,11 @@ namespace NUMEROS{
           if(a.n%pri==0&&b.n%pri==0){
             a.n=a.n/pri;
             b.n=b.n/pri;
+            i=0;
           }
           else{
             pri++;
+
           }
       }
     }
@@ -104,6 +106,29 @@ namespace NUMEROS{
       }
       return aux;
     }
+    Racionales raiz(Enteros p){
+      Racionales aux(this->numerador,this->denominador);
+      float aux_raiz[2]={float(aux.numerador),float(aux.denominador)};
+      int k,l=1;
+      for(int j=0;j<2;j++){
+        for(int i=1;i<aux_raiz[j];i++){
+          for(int cont=0;cont<p.n;cont++){
+            k=i;
+            l*=i;
+          }
+          if(l==aux_raiz[j]){
+            aux_raiz[j]=k;
+            l=1;
+          }
+          else{
+            l=1;
+          }
+        }
+      }
+      aux.numerador=aux_raiz[0];
+      aux.denominador=aux_raiz[1];
+      return aux;
+    }
     bool operator==(const Racionales &a)const{
       return this->numerador/this->denominador==a.numerador/a.denominador;
     }
@@ -147,7 +172,9 @@ namespace NUMEROS{
   Racionales operator*(Racionales a,Racionales b){
     Racionales c;
     c.numerador=a.numerador*b.numerador;
+    cout<<"El numerador es c: "<<c.numerador<<"El numerador es a: "<<a.numerador<<"El numerador es b: "<<b.numerador<<endl;
     c.denominador=a.denominador*b.denominador;
+    cout<<"El denominador es c:"<<c.denominador<<"El denominador es a:"<<a.denominador<<"El denominador es a:"<<b.denominador<<endl;
     return c;
   }
   Racionales operator/(Racionales a,Racionales b){

@@ -15,7 +15,7 @@ int main(){
     f=3;
     g=2;
     Racionales a1(a,b),b1(c,d),c1,d1,f1(64,128),g1(512,1024);
-    Reales a2(a1),b2(b1);
+    Reales a2(0.5),b2(b1);
     cout<<"Racionales"<<endl;
     cout<<"valor de a1: "<<a1<<endl;
     c1=f;

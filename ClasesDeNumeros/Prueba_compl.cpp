@@ -15,8 +15,10 @@ int main(){
     d=2;
     f=3;
     g=2;
+    ////////////////////////////
     Racionales a1(a,b),b1(c,d),c1,d1,f1(64,128),g1(512,1024);
-    Reales a2(a1),b2(b1);
+    ///////////////////////
+    Reales a2(f1),b2(b1);
     cout<<"Racionales"<<endl;
     cout<<"valor de a1: "<<a1<<endl;
     c1=f;
@@ -32,7 +34,7 @@ int main(){
     cout<<"Real b2: Parte real: "<<b2<<" Parte racional: "<<b2<<endl;
 
     cout<<"Valor de la potencia de a2: "<<a2<<endl;
-    Complejos a3(a2,3),b3(b2);
+    Complejos a3(0,-27),b3(b2,1);
     cout<<endl<<"Complejos"<<endl;
     cout<<"valor de a3: "<<a3<<endl;
 
@@ -48,15 +50,17 @@ int main(){
     else{
       cout<<" son iguales"<<endl;
     }*/
-    cout<<"Valor de la suma de a3: "<<a3<<" + a3: "<<a3<<" = c:"<<a3+a3<<endl;
+    a3.set_tipo(0);
+    b3.set_tipo(1);
+    cout<<"Valor de la suma de a3: "<<a3<<" + a3: "<<a3<<" = c:"<<(a3+a3)<<endl;
     cout<<"Valor de la resta de a3: "<<a3<<" - b3: "<<b3<<" = c:"<<a3-b3<<endl;
-    cout<<"Valor de la resta de a3: "<<a3<<" * b3: "<<b3<<" = c:"<<a3*b3<<endl;
-    cout<<"Valor de la resta de a3: "<<a3<<" / b3: "<<b3<<" = c:"<<a3/b3<<endl;
+    cout<<"Valor de la multiplicacion de a3: "<<a3<<" * b3: "<<b3<<" = c:"<<a3*b3<<endl;
+    cout<<"Valor de la division de a3: "<<a3<<" / b3: "<<b3<<" = c:"<<a3/b3<<endl;
+    cout<<"Valor de la raiz cuadrada de a3: "<<a3<<" = z_1:"<<a3.raiz(2)<<endl;
     /*
     cout<<"Valor de la resta de a2: "<<a2<<" - b2: "<<b2<<" = c:"<<a2-b2<<endl;
     cout<<"Valor de la multiplicacion de a2: "<<a2<<" * b2: "<<b2<<" = c:"<<a2*b2<<endl;
     cout<<"Valor de la division de a2: "<<a2<<" / b2: "<<b2<<" = c:"<<a2/b2<<endl;*/
-
   }
   catch(const char *s ){
     cout << "\n" << s <<endl;

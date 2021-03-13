@@ -19,6 +19,28 @@ namespace NUMEROS{
       }
       return aux;
     }
+    Enteros raiz(Enteros p){
+      Enteros aux(this->n);
+      float aux_raiz[1]={float(aux.n)};
+      int k,l=1;
+      for(int j=0;j<1;j++){
+        for(int i=1;i<aux_raiz[j];i++){
+          for(int cont=0;cont<p.n;cont++){
+            k=i;
+            l*=i;
+          }
+          if(l==aux_raiz[j]){
+            aux_raiz[j]=k;
+            l=1;
+          }
+          else{
+            l=1;
+          }
+        }
+      }
+      aux.n=aux_raiz[0];
+      return aux;
+    }
     Enteros& operator=(Enteros a){
       this->n=a.n;
       return *this;
