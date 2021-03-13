@@ -1,8 +1,9 @@
-#ifndef Complejos_H
-#define Complejos_H
+#ifndef COMPLEJOS_H
+#define COMPLEJOS_H
 #include <iostream>
 #include "Reales.hpp"
 #include <math.h>
+const float pi=3.141592;
 using namespace std;
 namespace NUMEROS{
   class Complejos{
@@ -43,37 +44,59 @@ namespace NUMEROS{
       real.set_tipo(a);
       imaginario.set_tipo(a);
     }
+    float modulo(){
+      float mod=sqrt((real*real+imaginario*imaginario).real);
+      return mod;
+    }
+    float argumento(){
+      float arg=0;
+      if(real==0&&imaginario>0){
+        arg=pi/2;
+      }
+      else if(real==0&&imaginario<0){
+        arg=(3*pi)/2;
+      }
+      else if(real>0&&imaginario==0){
+        arg=0;
+      }
+      else if(real<0&&imaginario==0){
+        arg=pi;
+      }
+      else if(real<0&&imaginario<0){
+        arg=atan((imaginario/real).real)+pi;
+      }
+      else if(real>0&&imaginario<0){
+        arg=atan((imaginario/real).real)+2*pi;
+      }
+      else if(real>0&&imaginario>0){
+        arg=atan((imaginario/real).real);
+      }
+      else{
+        arg=atan((imaginario/real).real)+pi;
+      }
+      return arg;
+    }
+    char* polar(){
+      float mod;
+      float arg;
+      mod=modulo();
+      arg=argumento();
+      arg=(arg*180)/pi;
+      static char pol[30];
+      sprintf(pol,"%.2fcis(%.0f)",mod,arg);
+      return pol;
+    }
     Complejos raiz(Enteros p){
       Complejos aux(this->real,this->imaginario);
-      float pi=3.141592;
-      float modulo=sqrt(aux.real.real*aux.real.real+aux.imaginario.real*aux.imaginario.real);
-      cout<<"Valor de modulo: "<<modulo<<endl;
+      float mod=modulo();
+      //cout<<"Valor de modulo: "<<modulo<<endl;
       float arg=0;
-      if(aux.real.real>0&&aux.imaginario.real>0){
-       arg=atan(aux.imaginario.real/aux.real.real);
-      }
-      else if(aux.real.real>0&&aux.imaginario.real<0){
-        cout<<"Entre en segundo if" <<endl;
-         arg=atan(aux.imaginario.real/aux.real.real)+2*pi;
-        cout<<"Valor de argumento: "<<arg<<endl;
-      }
-      else if(((aux.real.real==0||aux.real.real<0)&&aux.imaginario.real<0)||(aux.real.real<0&&aux.imaginario.real>0)){
-        if(aux.imaginario.real<0&&aux.real.real==0){
-          cout<<"Entre en 3 if" <<endl;
-          arg=(270*pi)/180;
-          cout<<"Valor de argumento1: "<<arg<<endl;
-        }
-        else{
-          cout<<"Entre en 4 if" <<endl;
-          arg=atan(aux.imaginario.real/aux.real.real)+pi;
-          cout<<"Valor de argumento: "<<arg<<endl;
-        }
-      }
-      cout<<"Valor de argumento: "<<(arg*180)/pi<<endl;
+      arg=argumento();
+      /*cout<<"Valor de argumento: "<<(arg*180)/pi<<endl;
       cout<<"valor de cos:"<<cos(arg/2)<<endl;
-      cout<<"valor de sin:"<<sin(arg/2)<<endl;
-      aux.real.real=sqrt(modulo)*cos(arg/2);
-      aux.imaginario.real=sqrt(modulo)*sin(arg/2);
+      cout<<"valor de sin:"<<sin(arg/2)<<endl;*/
+      aux.real.real=sqrt(mod)*cos(arg/2);
+      aux.imaginario.real=sqrt(mod)*sin(arg/2);
       return aux;
     }
   };
@@ -108,6 +131,10 @@ namespace NUMEROS{
   ostream& operator<<(ostream& os,Complejos a){
     a.real.set_tipo(a.tipo);
     a.imaginario.set_tipo(a.tipo);
+    if(a.imaginario<0){
+      cout<<a.real<<" - "<<a.imaginario*-1;
+      return  os<<a.letra[0];
+    }
     cout<<a.real<<" + "<<a.imaginario;
     return  os<<a.letra[0];
   }

@@ -34,7 +34,7 @@ int main(){
     cout<<"Real b2: Parte real: "<<b2<<" Parte racional: "<<b2<<endl;
 
     cout<<"Valor de la potencia de a2: "<<a2<<endl;
-    Complejos a3(0,-27),b3(b2,1);
+    Complejos a3(2*sqrt(3),-2),b3(6,-2),c3(-1,12),d3(-3,-3),f3(0,1),e3(0,-1),j3(1,0),i3(-1,0);
     cout<<endl<<"Complejos"<<endl;
     cout<<"valor de a3: "<<a3<<endl;
 
@@ -57,10 +57,19 @@ int main(){
     cout<<"Valor de la multiplicacion de a3: "<<a3<<" * b3: "<<b3<<" = c:"<<a3*b3<<endl;
     cout<<"Valor de la division de a3: "<<a3<<" / b3: "<<b3<<" = c:"<<a3/b3<<endl;
     cout<<"Valor de la raiz cuadrada de a3: "<<a3<<" = z_1:"<<a3.raiz(2)<<endl;
+    cout<<"Forma polar de a3: "<<a3<<" -> "<<a3.polar()<<endl;
     /*
     cout<<"Valor de la resta de a2: "<<a2<<" - b2: "<<b2<<" = c:"<<a2-b2<<endl;
     cout<<"Valor de la multiplicacion de a2: "<<a2<<" * b2: "<<b2<<" = c:"<<a2*b2<<endl;
     cout<<"Valor de la division de a2: "<<a2<<" / b2: "<<b2<<" = c:"<<a2/b2<<endl;*/
+    cout<<"Forma polar de a3: "<<a3<<" -> "<<a3.polar()<<endl;
+    cout<<"Forma polar de b3: "<<b3<<" -> "<<b3.polar()<<endl;
+    cout<<"Forma polar de c3: "<<c3<<" -> "<<c3.polar()<<endl;
+    cout<<"Forma polar de d3: "<<d3<<" -> "<<d3.polar()<<endl;
+    cout<<"Forma polar de e3: "<<e3<<" -> "<<e3.polar()<<endl;
+    cout<<"Forma polar de f3: "<<f3<<" -> "<<f3.polar()<<endl;
+    cout<<"Forma polar de j3: "<<j3<<" -> "<<j3.polar()<<endl;
+    cout<<"Forma polar de i3: "<<i3<<" -> "<<i3.polar()<<endl;
   }
   catch(const char *s ){
     cout << "\n" << s <<endl;

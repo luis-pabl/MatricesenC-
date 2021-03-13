@@ -88,6 +88,7 @@ namespace NUMEROS{
       return a;
     }
     bool operator==(const Reales &a)const{
+      //cout<<"Me estoy ejecutando"<<endl;
       return this->real==a.real;
     }
     bool operator<(const Reales &a)const{
