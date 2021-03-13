@@ -1,3 +1,4 @@
+//
 #ifndef NATURALES_H
 #define NATURALES_H
 #include <iostream>
